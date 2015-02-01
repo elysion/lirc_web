@@ -35,8 +35,6 @@ if (process.env.NODE_ENV == 'test' || process.env.NODE_ENV == 'development') {
     lirc_node.remotes = require(__dirname + '/test/fixtures/remotes.json');
     config = require(__dirname + '/test/fixtures/config.json');
 } else {
-    lirc_node.init();
-
     // Config file is optional
     try {
         config = require(__dirname + '/config.json');
@@ -44,6 +42,8 @@ if (process.env.NODE_ENV == 'test' || process.env.NODE_ENV == 'development') {
         console.log("DEBUG:", e);
         console.log("WARNING: Cannot find config.json!");
     }
+
+    lirc_node.init(config.backend);
 }
 
 
